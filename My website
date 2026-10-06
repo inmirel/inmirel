@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="ru" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Внутренний аудит испытательных лабораторий | ГОСТ ISO/IEC 17025-2019</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        navy: {
+                            800: '#1e293b',
+                            900: '#0f172a',
+                            950: '#020617',
+                        },
+                        brand: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px -10px rgba(0, 0, 0, 0.15);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased selection:bg-brand-500 selection:text-white">
+
+    <header class="sticky top-0 z-50 bg-slate-900/95 backdrop-blur border-b border-slate-800 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Logo / Title -->
+            <a href="#" class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-lg bg-brand-600 flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-brand-500/30">
+                    <i class="fa-solid fa-microscope"></i>
+                </div>
+                <div>
+                    <span class="font-bold text-lg leading-none block tracking-tight text-white">LabAudit<span class="text-brand-500">.kz</span></span>
+                    <span class="text-xs text-slate-400 font-medium tracking-wide">ISO/IEC 17025-2019</span>
+                </div>
+            </a>
+
+            <!-- Navigation Links -->
+            <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
+                <a href="#services" class="hover:text-brand-500 transition-colors">Услуги</a>
+                <a href="#calculator" class="hover:text-brand-500 transition-colors">Калькулятор</a>
+                <a href="#packages" class="hover:text-brand-500 transition-colors">Пакеты</a>
+                <a href="#about" class="hover:text-brand-500 transition-colors">Преимущества</a>
+            </nav>
+
+            <!-- Quick Action Buttons -->
+            <div class="hidden sm:flex items-center gap-4">
+                <a href="https://wa.me/77000000000?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%98%D0%BD%D1%82%D0%B5%D1%80%D0%B5%D1%81%D1%83%D0%B5%D1%82%D1%80%D0%B0%D1%81%D1%87%D0%B5%D1%82%20%D1%81%D1%82%D0%BE%D0%B8%D0%BC%D0%BE%D1%81%D1%82%D0%B8%20%D0%B2%D0%BD%D1%83%D1%82%D1%80%D0%B5%D0%BD%D0%BD%D0%B5%D0%B3%D0%BE%20%D0%B0%D1%83%D0%B4%D0%B8%D1%82%D0%B0%20%D0%A1%D0%9C%D0%9A" target="_blank" class="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white px-4 py-2 rounded-lg text-sm font-semibold transition-all shadow-md">
+                    <i class="fa-brands fa-whatsapp text-base"></i>
+                    <span>WhatsApp</span>
+                </a>
+                <a href="#contact" class="bg-brand-600 hover:bg-brand-500 text-white px-5 py-2 rounded-lg text-sm font-semibold transition-all shadow-md shadow-brand-600/30">
+                    Запросить аудит
+                </a>
+            </div>
+
+            <!-- Mobile Menu Toggle -->
+            <button id="mobileMenuBtn" class="md:hidden text-slate-300 hover:text-white p-2 text-xl" aria-label="Открыть меню">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Nav Menu -->
+        <div id="mobileMenu" class="hidden md:hidden bg-slate-900 border-b border-slate-800 px-4 pt-2 pb-6 space-y-3">
+            <a href="#services" class="block text-slate-300 hover:text-white py-2 font-medium">Услуги</a>
+            <a href="#calculator" class="block text-slate-300 hover:text-white py-2 font-medium">Калькулятор</a>
+            <a href="#packages" class="block text-slate-300 hover:text-white py-2 font-medium">Пакеты</a>
+            <a href="#about" class="block text-slate-300 hover:text-white py-2 font-medium">Преимущества</a>
+            <div class="pt-2 flex flex-col gap-2">
+                <a href="https://wa.me/77000000000" target="_blank" class="w-full text-center bg-emerald-600 text-white py-2.5 rounded-lg font-semibold flex items-center justify-center gap-2">
+                    <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                </a>
+                <a href="#contact" class="w-full text-center bg-brand-600 text-white py-2.5 rounded-lg font-semibold">
+                    Запросить аудит
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <section class="gradient-bg text-white py-16 lg:py-24 relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#3b82f6_1px,transparent_1px)] [background-size:16px_16px]"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="max-w-3xl">
+                <div class="inline-flex items-center gap-2 bg-brand-500/20 border border-brand-400/30 text-brand-300 px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-medium mb-6 backdrop-blur-sm">
+                    <i class="fa-solid fa-shield-halved text-brand-400"></i>
+                    <span>Соответствие ГОСТ ISO/IEC 17025-2019 (п. 8.8)</span>
+                </div>
+                <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white leading-tight mb-6">
+                    Независимый внутренний аудит и диагностика СМК испытательных лабораторий
+                </h1>
+                <p class="text-lg sm:text-xl text-slate-300 font-normal leading-relaxed mb-8">
+                    Объективная оценка готовности лаборатории, проверка соблюдения процедур стандарта и выявление рисков до прибытия аккредитационной комиссии в Казахстане.
+                </p>
+
+                <!-- CTA Buttons -->
+                <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 mb-12">
+                    <a href="#calculator" class="bg-brand-600 hover:bg-brand-500 text-white px-7 py-3.5 rounded-xl text-base font-semibold transition-all shadow-xl shadow-brand-600/30 text-center flex items-center justify-center gap-3">
+                        <i class="fa-solid fa-calculator"></i>
+                        <span>Рассчитать стоимость аудита</span>
+                    </a>
+                    <a href="#contact" class="bg-slate-800 hover:bg-slate-700 text-white border border-slate-700 px-7 py-3.5 rounded-xl text-base font-semibold transition-all text-center">
+                        Запросить КП
+                    </a>
+                </div>
+
+                <!-- Feature Badges -->
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-6 border-t border-slate-800">
+                    <div class="flex items-center gap-3 text-slate-300">
+                        <div class="w-8 h-8 rounded-full bg-brand-500/20 text-brand-400 flex items-center justify-center flex-shrink-0">
+                            <i class="fa-solid fa-check text-sm"></i>
+                        </div>
+                        <span class="text-sm font-medium">Официальный отчет с рекомендациями</span>
+                    </div>
+                    <div class="flex items-center gap-3 text-slate-300">
+                        <div class="w-8 h-8 rounded-full bg-brand-500/20 text-brand-400 flex items-center justify-center flex-shrink-0">
+                            <i class="fa-solid fa-file-contract text-sm"></i>
+                        </div>
+                        <span class="text-sm font-medium">Работа по договору ГПХ</span>
+                    </div>
+                    <div class="flex items-center gap-3 text-slate-300">
+                        <div class="w-8 h-8 rounded-full bg-brand-500/20 text-brand-400 flex items-center justify-center flex-shrink-0">
+                            <i class="fa-solid fa-lock text-sm"></i>
+                        </div>
+                        <span class="text-sm font-medium">Гарантия конфиденциальности (NDA)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="py-20 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <h2 class="text-3xl font-bold text-slate-900 tracking-tight mb-4">Направления аудита и услуги</h2>
+                <p class="text-slate-600 text-base">Комплексная проверка процессов менеджмента и технической компетентности испытательной лаборатории</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Service 1 -->
+                <div class="bg-white rounded-2xl p-8 border border-slate-200 card-hover flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-blue-100 text-brand-600 flex items-center justify-center text-xl font-bold mb-6">
+                            <i class="fa-solid fa-folder-tree"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-3">Внутренний аудит СМК</h3>
+                        <p class="text-xs font-semibold text-brand-600 uppercase tracking-wider mb-4">Разделы 4, 5, 6, 8 ГОСТ ISO/IEC 17025</p>
+                        <ul class="space-y-3 text-sm text-slate-600 mb-6">
+                            <li class="flex items-start gap-2.5">
+                                <i class="fa-solid fa-circle-check text-emerald-500 mt-1 flex-shrink-0"></i>
+                                <span>Проверка беспристрастности и структуры управления</span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <i class="fa-solid fa-circle-check text-emerald-500 mt-1 flex-shrink-0"></i>
+                                <span>Оценка управления рисками и возможностями (п. 8.5)</span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <i class="fa-solid fa-circle-check text-emerald-500 mt-1 flex-shrink-0"></i>
+                                <span>Аудит управления документацией, записями и архивом</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="bg-white rounded-2xl p-8 border border-slate-200 card-hover flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-blue-100 text-brand-600 flex items-center justify-center text-xl font-bold mb-6">
+                            <i class="fa-solid fa-flask-vial"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-3">Техническая компетентность</h3>
+                        <p class="text-xs font-semibold text-brand-600 uppercase tracking-wider mb-4">Раздел 7 ГОСТ ISO/IEC 17025</p>
+                        <ul class="space-y-3 text-sm text-slate-600 mb-6">
+                            <li class="flex items-start gap-2.5">
+                                <i class="fa-solid fa-circle-check text-emerald-500 mt-1 flex-shrink-0"></i>
+                                <span>Проверка процессов выбора, верификации и валидации методик</span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <i class="fa-solid fa-circle-check text-emerald-500 mt-1 flex-shrink-0"></i>
+                                <span>Оценка прослеживаемости измерений и эксплуатации оборудования</span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <i class="fa-solid fa-circle-check text-emerald-500 mt-1 flex-shrink-0"></i>
+                                <span>Аудит достоверности результатов (ВЛК и МСИ)</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="bg-white rounded-2xl p-8 border border-slate-200 card-hover flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-blue-100 text-brand-600 flex items-center justify-center text-xl font-bold mb-6">
+                            <i class="fa-solid fa-list-check"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-3">Предпроверочный аудит</h3>
+                        <p class="text-xs font-semibold text-brand-600 uppercase tracking-wider mb-4">Диагностика перед комиссией</p>
+                        <ul class="space-y-3 text-sm text-slate-600 mb-6">
+                            <li class="flex items-start gap-2.5">
+                                <i class="fa-solid fa-circle-check text-emerald-500 mt-1 flex-shrink-0"></i>
+                                <span>Моделирование реальной процедуры внешнего контроля</span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <i class="fa-solid fa-circle-check text-emerald-500 mt-1 flex-shrink-0"></i>
+                                <span>Выявление «узких мест» и критических рисков</span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <i class="fa-solid fa-circle-check text-emerald-500 mt-1 flex-shrink-0"></i>
+                                <span>Экспертиза паспортов оборудования и квалификационных карт</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="calculator" class="py-20 bg-slate-900 text-white relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-12">
+                <span class="text-brand-400 text-xs font-bold uppercase tracking-widest block mb-2">Онлайн калькулятор</span>
+                <h2 class="text-3xl font-bold tracking-tight text-white mb-4">Рассчитайте стоимость внутреннего аудита</h2>
+                <p class="text-slate-400 text-sm sm:text-base">Предварительная оценка стоимости зависит от объема Области аккредитации (ОА) и параметров лаборатории</p>
+            </div>
+
+            <div class="max-w-3xl mx-auto bg-slate-800/90 border border-slate-700/80 rounded-2xl p-6 sm:p-10 shadow-2xl backdrop-blur-sm">
+                <form id="calcForm" onsubmit="return false;" class="space-y-8">
+                    <!-- Step 1: Methods scope -->
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-200 mb-3">
+                            1. Объем области аккредитации (количество методик / ГОСТов)
+                        </label>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <label class="relative flex items-center p-4 rounded-xl border border-slate-700 bg-slate-900/60 cursor-pointer hover:border-brand-500 transition-all">
+                                <input type="radio" name="scope" value="150000" checked class="text-brand-600 focus:ring-brand-500 h-4 w-4">
+                                <span class="ml-3 text-sm font-medium text-slate-200">До 10 методик</span>
+                            </label>
+                            <label class="relative flex items-center p-4 rounded-xl border border-slate-700 bg-slate-900/60 cursor-pointer hover:border-brand-500 transition-all">
+                                <input type="radio" name="scope" value="280000" class="text-brand-600 focus:ring-brand-500 h-4 w-4">
+                                <span class="ml-3 text-sm font-medium text-slate-200">11 – 30 методик</span>
+                            </label>
+                            <label class="relative flex items-center p-4 rounded-xl border border-slate-700 bg-slate-900/60 cursor-pointer hover:border-brand-500 transition-all">
+                                <input type="radio" name="scope" value="500000" class="text-brand-600 focus:ring-brand-500 h-4 w-4">
+                                <span class="ml-3 text-sm font-medium text-slate-200">31 – 70 методик</span>
+                            </label>
+                            <label class="relative flex items-center p-4 rounded-xl border border-slate-700 bg-slate-900/60 cursor-pointer hover:border-brand-500 transition-all">
+                                <input type="radio" name="scope" value="700000" class="text-brand-600 focus:ring-brand-500 h-4 w-4">
+                                <span class="ml-3 text-sm font-medium text-slate-200">Более 70 методик</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Extra Options -->
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-200 mb-3">
+                            2. Дополнительные параметры
+                        </label>
+                        <div class="space-y-3">
+                            <label class="flex items-center justify-between p-4 rounded-xl border border-slate-700 bg-slate-900/60 cursor-pointer hover:border-brand-500 transition-all">
+                                <div class="flex items-center">
+                                    <input type="checkbox" id="optBranch" value="50000" class="rounded text-brand-600 focus:ring-brand-500 h-4 w-4">
+                                    <span class="ml-3 text-sm text-slate-200">Наличие филиалов или дополнительных площадок</span>
+                                </div>
+                                <span class="text-xs text-slate-400 font-mono">+50 000 ₸</span>
+                            </label>
+                            <label class="flex items-center justify-between p-4 rounded-xl border border-slate-700 bg-slate-900/60 cursor-pointer hover:border-brand-500 transition-all">
+                                <div class="flex items-center">
+                                    <input type="checkbox" id="optPreAudit" value="40000" class="rounded text-brand-600 focus:ring-brand-500 h-4 w-4">
+                                    <span class="ml-3 text-sm text-slate-200">Срочный предпроверочный аудит (до 3 дней)</span>
+                                </div>
+                                <span class="text-xs text-slate-400 font-mono">+40 000 ₸</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Output Area -->
+                    <div class="bg-slate-900/90 rounded-xl p-6 border border-slate-700/80 flex flex-col sm:flex-row items-center justify-between gap-4">
+                        <div>
+                            <span class="text-xs text-slate-400 font-medium uppercase tracking-wider block">Ориентировочная стоимость:</span>
+                            <div class="text-3xl font-extrabold text-brand-400 mt-1" id="calcResult">150 000 ₸</div>
+                            <span class="text-xs text-slate-500">Без учета командировочных расходов за пределами Астаны</span>
+                        </div>
+                        <button type="button" onclick="applyCalcToForm()" class="w-full sm:w-auto bg-brand-600 hover:bg-brand-500 text-white px-6 py-3 rounded-xl font-semibold text-sm transition-all shadow-lg shadow-brand-600/30 whitespace-nowrap">
+                            Зафиксировать стоимость
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <section id="packages" class="py-20 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <h2 class="text-3xl font-bold text-slate-900 tracking-tight mb-4">Пакеты услуг аудита</h2>
+                <p class="text-slate-600 text-base">Выбирайте удобный формат работы в зависимости от задач вашей организации</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Package 1 -->
+                <div class="bg-white rounded-2xl border border-slate-200 p-8 card-hover flex flex-col justify-between">
+                    <div>
+                        <span class="text-xs font-bold uppercase tracking-wider text-slate-500 bg-slate-100 px-3 py-1 rounded-full inline-block mb-4">Малые лаборатории</span>
+                        <h3 class="text-2xl font-bold text-slate-900 mb-2">Пакет «Мини»</h3>
+                        <p class="text-slate-500 text-xs mb-6">Для компактных лабораторий с небольшим перечнем методик</p>
+                        <div class="text-3xl font-extrabold text-slate-900 mb-6">150 000 <span class="text-base font-medium text-slate-500">₸</span></div>
+                        <ul class="space-y-3 text-sm text-slate-600 mb-8">
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-500"></i>До 10 методик испытаний</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-500"></i>Срок проведения: 1–2 дня</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-500"></i>Аудит Разделов 4, 5, 6, 8</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-500"></i>Отчет по внутреннему аудиту</li>
+                        </ul>
+                    </div>
+                    <a href="#contact" class="w-full text-center bg-slate-100 hover:bg-slate-200 text-slate-800 font-semibold py-3 rounded-xl transition-all block">Заказать Мини</a>
+                </div>
+
+                <!-- Package 2 (Highlighted) -->
+                <div class="bg-white rounded-2xl border-2 border-brand-500 p-8 card-hover relative flex flex-col justify-between shadow-xl">
+                    <div class="absolute -top-3.5 left-1/2 transform -translate-x-1/2 bg-brand-600 text-white text-xs font-bold uppercase tracking-wider px-4 py-1 rounded-full shadow-md">
+                        Популярный выбор
+                    </div>
+                    <div>
+                        <span class="text-xs font-bold uppercase tracking-wider text-brand-600 bg-brand-50 px-3 py-1 rounded-full inline-block mb-4">Стандартный формат</span>
+                        <h3 class="text-2xl font-bold text-slate-900 mb-2">Пакет «Стандарт»</h3>
+                        <p class="text-slate-500 text-xs mb-6">Оптимальное решение для большинства испытательных центров</p>
+                        <div class="text-3xl font-extrabold text-slate-900 mb-6">280 000 <span class="text-base font-medium text-slate-500">₸</span></div>
+                        <ul class="space-y-3 text-sm text-slate-600 mb-8">
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-500"></i>11 – 30 методик испытаний</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-500"></i>Срок проведения: 2–3 дня</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-500"></i>Полный аудит СМК + Техническая часть</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-500"></i>Детальный анализ несоответствий</li>
+                        </ul>
+                    </div>
+                    <a href="#contact" class="w-full text-center bg-brand-600 hover:bg-brand-500 text-white font-semibold py-3 rounded-xl transition-all shadow-md shadow-brand-600/30 block">Заказать Стандарт</a>
+                </div>
+
+                <!-- Package 3 -->
+                <div class="bg-white rounded-2xl border border-slate-200 p-8 card-hover flex flex-col justify-between">
+                    <div>
+                        <span class="text-xs font-bold uppercase tracking-wider text-slate-500 bg-slate-100 px-3 py-1 rounded-full inline-block mb-4">Крупные центры</span>
+                        <h3 class="text-2xl font-bold text-slate-900 mb-2">Пакет «Оптима»</h3>
+                        <p class="text-slate-500 text-xs mb-6">Для мультилабораторий и развернутых областей аккредитации</p>
+                        <div class="text-3xl font-extrabold text-slate-900 mb-6">500 000 <span class="text-base font-medium text-slate-500">₸</span></div>
+                        <ul class="space-y-3 text-sm text-slate-600 mb-8">
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-500"></i>31 – 70 методик испытаний</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-500"></i>Срок проведения: 4–5 дней</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-500"></i>Углубленный предпроверочный аудит</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-500"></i>Пост-аудит (проверка устранения)</li>
+                        </ul>
+                    </div>
+                    <a href="#contact" class="w-full text-center bg-slate-100 hover:bg-slate-200 text-slate-800 font-semibold py-3 rounded-xl transition-all block">Заказать Оптима</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-20 bg-white">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-slate-900 rounded-3xl p-8 sm:p-12 text-white shadow-2xl relative overflow-hidden">
+                <div class="text-center max-w-xl mx-auto mb-10">
+                    <h2 class="text-3xl font-bold tracking-tight text-white mb-3">Запросить коммерческое предложение</h2>
+                    <p class="text-slate-300 text-sm">Заполните анкету, и я подготовлю точный расчет стоимости проведения внутреннего аудита под ваши задачи</p>
+                </div>
+
+                <form id="auditForm" class="space-y-6">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-2">Название лаборатории / Организации *</label>
+                            <input type="text" required placeholder="ТОО «Пример Лаб»" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-brand-500">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-2">Ваше Имя *</label>
+                            <input type="text" required placeholder="Нурлан" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-brand-500">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-2">Телефон / WhatsApp *</label>
+                            <input type="tel" required placeholder="+7 (700) 000-00-00" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-brand-500">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-2">Город / Регион</label>
+                            <input type="text" placeholder="г. Астана" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-brand-500">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-2">Количество методик в ОА</label>
+                        <select id="formScopeSelect" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-500">
+                            <option value="До 10 методик">До 10 методик</option>
+                            <option value="11-30 методик">11 – 30 методик</option>
+                            <option value="31-70 методик">31 – 70 методик</option>
+                            <option value="Более 70 методик">Более 70 методик</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-2">Краткое описание задач аудита</label>
+                        <textarea rows="3" placeholder="Укажите объекты испытаний или особенности вашей лаборатории..." class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-brand-500"></textarea>
+                    </div>
+
+                    <button type="submit" class="w-full bg-brand-600 hover:bg-brand-500 text-white font-semibold py-4 rounded-xl transition-all shadow-xl shadow-brand-600/30 text-base">
+                        Отправить заявку на аудит
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-slate-950 text-slate-400 py-12 border-t border-slate-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+                <div>
+                    <span class="font-bold text-lg text-white block mb-2">LabAudit<span class="text-brand-500">.kz</span></span>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        Независимые услуги по проведению внутренних аудитов и диагностической оценке испытательных лабораторий по стандарту ГОСТ ISO/IEC 17025-2019 в Республике Казахстан.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-white mb-3">Контакты</h4>
+                    <p class="text-xs text-slate-400 mb-1"><i class="fa-solid fa-location-dot mr-2 text-brand-500"></i> г. Астана, Республика Казахстан</p>
+                    <p class="text-xs text-slate-400 mb-1"><i class="fa-solid fa-phone mr-2 text-brand-500"></i> +7 (700) 000-00-00</p>
+                    <p class="text-xs text-slate-400"><i class="fa-solid fa-envelope mr-2 text-brand-500"></i> info@labaudit.kz</p>
+                </div>
+                <div>
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-white mb-3">Конфиденциальность</h4>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        Все данные и сведению, полученные в ходе аудита, подлежат строгой конфиденциальности и защищены Соглашением о неразглашении (NDA).
+                    </p>
+                </div>
+            </div>
+            <div class="pt-8 border-t border-slate-900 text-center text-xs text-slate-500">
+                © 2026 LabAudit.kz. Все права защищены. Услуги оказываются по договору ГПХ с физическим лицом.
+            </div>
+        </div>
+    </footer>
+
+    <div id="successModal" class="fixed inset-0 bg-slate-900/80 backdrop-blur-sm hidden items-center justify-center z-50 p-4">
+        <div class="bg-white rounded-2xl max-w-md w-full p-8 text-center shadow-2xl animate-fade-in">
+            <div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl">
+                <i class="fa-solid fa-circle-check"></i>
+            </div>
+            <h3 class="text-xl font-bold text-slate-900 mb-2">Заявка успешно отправлена!</h3>
+            <p class="text-sm text-slate-600 mb-6">Спасибо за обращение. Я свяжусь с вами в ближайшее время для обсуждения деталей аудита.</p>
+            <button onclick="closeModal()" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-semibold py-3 rounded-xl transition-all">
+                Закрыть
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Interactive Fee Calculator Logic
+        function calculateFee() {
+            const scopeInputs = document.querySelectorAll('input[name="scope"]');
+            let baseFee = 150000;
+
+            scopeInputs.forEach(input => {
+                if (input.checked) {
+                    baseFee = parseInt(input.value);
+                }
+            });
+
+            const branchOpt = document.getElementById('optBranch');
+            const preAuditOpt = document.getElementById('optPreAudit');
+
+            if (branchOpt && branchOpt.checked) baseFee += parseInt(branchOpt.value);
+            if (preAuditOpt && preAuditOpt.checked) baseFee += parseInt(preAuditOpt.value);
+
+            document.getElementById('calcResult').innerText = baseFee.toLocaleString('ru-RU') + ' ₸';
+        }
+
+        // Add Listeners to Calculator Inputs
+        document.querySelectorAll('input[name="scope"], #optBranch, #optPreAudit').forEach(element => {
+            element.addEventListener('change', calculateFee);
+        });
+
+        // Apply calculator output to contact form select
+        function applyCalcToForm() {
+            const selectedScope = document.querySelector('input[name="scope"]:checked');
+            const formSelect = document.getElementById('formScopeSelect');
+            
+            if (selectedScope && formSelect) {
+                const val = parseInt(selectedScope.value);
+                if (val === 150000) formSelect.value = "До 10 методик";
+                else if (val === 280000) formSelect.value = "11-30 методик";
+                else if (val === 500000) formSelect.value = "31-70 методик";
+                else formSelect.value = "Более 70 методик";
+            }
+
+            // Scroll to form smoothly
+            document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Form Submit Simulation
+        const auditForm = document.getElementById('auditForm');
+        const successModal = document.getElementById('successModal');
+
+        auditForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            successModal.classList.remove('hidden');
+            successModal.classList.add('flex');
+            auditForm.reset();
+        });
+
+        function closeModal() {
+            successModal.classList.add('hidden');
+            successModal.classList.remove('flex');
+        }
+    </script>
+</body>
+</html>
